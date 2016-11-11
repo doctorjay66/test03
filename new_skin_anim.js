@@ -16,7 +16,7 @@ document.body.appendChild( renderer.domElement );
 ambientLight = new THREE.AmbientLight( 0xffffff );
 scene.add( ambientLight );
 
-loader.load( '../assets/models/figure_rigged_run_new.json', function( geometry, materials ) {
+loader.load( 'figure_rigged_run_new.json', function( geometry, materials ) {
     var mat = new THREE.MeshLambertMaterial( { color: 0xFF0000, skinning: true } );
     mesh = new THREE.SkinnedMesh(
         geometry,
