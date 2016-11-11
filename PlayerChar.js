@@ -4,9 +4,9 @@ THREE.PlayerChar = function () {
 	
 	this.load = function ( url, pos, onLoad ) {
 	
-		/*var scope = this;
+		var scope = this;
 
-		var loader = new THREE.JSONLoader();
+		/*var loader = new THREE.JSONLoader();
 		loader.load( url, function( geometry, materials ) {
 			var mat = new THREE.MeshLambertMaterial( { color: 0xFF0000, skinning: true } );
 			THREE.SkinnedMesh.call(scope, geometry, mat);
