@@ -23,7 +23,7 @@ function init() {
 	camera.lookAt(scene.position);
     scene.add(camera);
     PLAYERS['p1'] = new THREE.PlayerChar();
-    //PLAYERS['p1'].load("figure_rigged_run_new.json", new THREE.Vector3(0, 0, 0), add_player);
+    PLAYERS['p1'].load("figure_rigged_run_new.json", new THREE.Vector3(0, 0, 0), add_player);
     animate();
 }
 
