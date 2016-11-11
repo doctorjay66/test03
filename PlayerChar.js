@@ -2,7 +2,7 @@ THREE.PlayerChar = function () {
 
 	this.animations = {};
 	
-	this.load = function ( url, pos, onLoad ) {
+	this.myload = function ( url, pos, onLoad ) {
 	
 		var scope = this;
 
