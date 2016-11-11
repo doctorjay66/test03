@@ -2,7 +2,7 @@ THREE.PlayerChar = function () {
 
 	this.animations = {};
 	
-	this.load = function ( url, pos, onLoad ) {
+	/*this.load = function ( url, pos, onLoad ) {
 	
 		var scope = this;
 
@@ -22,7 +22,7 @@ THREE.PlayerChar = function () {
 
 		} );
 
-	};
+	};*/
 };
 
 THREE.PlayerChar.prototype = Object.create( THREE.SkinnedMesh.prototype );
