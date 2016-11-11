@@ -2,9 +2,9 @@ THREE.PlayerChar = function () {
 
 	this.animations = {};
 	
-	/*this.load = function ( url, pos, onLoad ) {
+	this.load = function ( url, pos, onLoad ) {
 	
-		var scope = this;
+		/*var scope = this;
 
 		var loader = new THREE.JSONLoader();
 		loader.load( url, function( geometry, materials ) {
@@ -20,9 +20,9 @@ THREE.PlayerChar = function () {
 			
 			if ( onLoad !== undefined ) onLoad(scope, pos);
 
-		} );
+		} );*/
 
-	};*/
+	};
 };
 
 THREE.PlayerChar.prototype = Object.create( THREE.SkinnedMesh.prototype );
