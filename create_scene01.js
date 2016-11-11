@@ -1,4 +1,4 @@
-var camera, scene, renderer;
+var camera, scene, renderer, PLAYERS = {};
 
 function init() {
     renderer = new THREE.WebGLRenderer();
@@ -22,7 +22,15 @@ function init() {
 	camera.position.set( -25.0, 20.0, 70.0 );
 	camera.lookAt(scene.position);
     scene.add(camera);
+    PLAYERS['p1'] = new THREE.PlayerChar();
     animate();
+}
+
+function add_player(mesh, pos) {
+    mesh.position.x = pos.x;
+    mesh.position.y = PLAYER_Y;
+    mesh.castShadow = true;
+    scene.add( mesh );
 }
 
 function animate() {
