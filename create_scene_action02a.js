@@ -43,7 +43,7 @@ function init() {
 	camera.position.set( -45.0, 40.0, 30 );
 	camera.lookAt(scene.position);
     scene.add(camera);
-    //gui = new DigiRepGui();
+    gui = new DigiRepGui();
     PLAYERS['p1'] = new THREE.PlayerChar();
     PLAYERS['p1'].load("../assets/models/figure_rigged_run_new.json", new THREE.Vector3(0, 0, 0), add_player);
     PLAYERS['p2'] = new THREE.PlayerChar();
