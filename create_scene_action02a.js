@@ -45,9 +45,9 @@ function init() {
     scene.add(camera);
     gui = new DigiRepGui();
     PLAYERS['p1'] = new THREE.PlayerChar();
-    PLAYERS['p1'].load("../assets/models/figure_rigged_run_new.json", new THREE.Vector3(0, 0, 0), add_player);
+    PLAYERS['p1'].load("figure_rigged_run_new.json", new THREE.Vector3(0, 0, 0), add_player);
     PLAYERS['p2'] = new THREE.PlayerChar();
-    PLAYERS['p2'].load("../assets/models/figure_rigged_run_new.json", new THREE.Vector3(10, 0, 0), add_player);
+    PLAYERS['p2'].load("figure_rigged_run_new.json", new THREE.Vector3(10, 0, 0), add_player);
     animate();
 }
 
