@@ -3,10 +3,10 @@ function executeIfReady(a, delta) {
 		if(a.state == READY  && a.name == 'kickr') {
 		    a.elapsed_time += delta;
 		    if(!a.is_playing) {
-		        mixer = new THREE.AnimationMixer( a.mesh );
-		        clip = a.mesh.geometry.animations[1]; //2=run, 0=jump, 1=kick
-		        action = mixer.clipAction(clip);
-		        action.play();
+		        mixer_kick = new THREE.AnimationMixer( a.mesh );
+		        clip_kick = a.mesh.geometry.animations[1]; //2=run, 0=jump, 1=kick
+		        action_kick = mixer_kick.clipAction(clip_kick);
+		        action_kick.play();
 		        setAngleTo(a, "xz");
 		        a.mesh.rotation.y = a.mesh.angle_to;
 		        a.is_playing = true;
@@ -15,7 +15,7 @@ function executeIfReady(a, delta) {
 		    //if(a.mesh.geometry.animations[1].currentTime > 0.66) {
 		    if(a.elapsed_time > 0.66) {
 		        //a.mesh.animations[a.name].stop();
-		        action.stop();
+		        action_kick.stop();
 		        a.state = OVER;
 		        //console.log(action_list[a.id+1].name);
 		        //action_list[a.id+1].state = READY;
@@ -27,7 +27,29 @@ function executeIfReady(a, delta) {
 		    } else {
 	            move_mash(a.mesh, a.dir, a.speed, delta)
 	        }
-		} 
+		} else if(a.name == 'run') {
+		    if(!a.is_playing) {
+		        //a.mesh.animations[a.name].play(0, 1.0);
+		        mixer_run = new THREE.AnimationMixer( a.mesh );
+		        clip_run = a.mesh.geometry.animations[2];
+		        action = mixer_run.clipAction(clip_run);
+		        action.play();
+		        setAngleTo(a, "xz");
+		        a.mesh.rotation.y = a.mesh.angle_to;
+		        a.is_playing = true;
+		    }
+		    if(arriveTo(a.mesh.position, a.dest, d=2.0)) {
+		        setEnd(a);
+		        //a.mesh.animations[a.name].stop();
+		        action.stop();
+		        if(a.to_activate) {
+					activateAction(a);
+				}
+		    } else {
+	            move_mash(a.mesh, a.dir, a.speed, delta)
+	        }
+	        move_mash(a.mesh, a.dir, a.speed, delta);
+		}
 }
 
 function activateAction(a) {

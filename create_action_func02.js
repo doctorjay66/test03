@@ -2,34 +2,14 @@ function createUserAction(/*user_action*/) {
     
     if(user_action == SHOOT) {
         var a = {};
-        /*a.name = 'kickr';
-        a.mesh = SELECTED_PLAYER; //PLAYERS['p1'];
-        a.state = READY;
-        a.is_playing = false;
-        a.id = action_list.length;
-        a.dest = dest_point; //new THREE.Vector3(26, BALL_Y, 25);
-        a.dir = direction(a.dest, ball.position);
-        //a.isRotated = false;
-        action_list.push(a);*/
-        console.log(a);
+        //console.log(a);
         setAction(a, {'name':'kickr', 'mesh':SELECTED_PLAYER, 'dest':dest_point, 'state':READY, 
                       'd_source':ball.position, 'to_activate':[1]});
         
         var a = {};
-        /*a.name = 'move';
-        a.mesh = ball;
-        a.state = WAIT;
-        a.id = action_list.length;
-        a.dest = dest_point; //new THREE.Vector3(26, BALL_Y, 25);
-        a.dest.y = BALL_Y;
-        a.dir = direction(a.dest, ball.position);
-        a.speed = 20;
-        action_list.push(a);
-        //console.log(a);  
-        //console.log(dest_point);*/
         var b_dest = new THREE.Vector3(0,0,0);
         b_dest.copy(dest_point);
-        //b_dest.y = BALL_Y;//mid_spline_point.add(dist_vect.divideScalar(2));
+        b_dest.y = BALL_Y;//mid_spline_point.add(dist_vect.divideScalar(2));
         setAction(a, {'name':'move', 'mesh':ball, 'dest':b_dest, 'state':WAIT, 
                       'd_source':ball.position, speed:30});
     } else if(user_action == PASS) {
@@ -87,7 +67,7 @@ function setAction(a, p) {
 	a.name = p.name;
 	console.log(a.name);
 	a.mesh = p.mesh;
-		console.log(a.mesh);
+		//console.log(a.mesh);
 	a.state = p.state
 	a.is_playing = false;
 	a.id = action_list.length;

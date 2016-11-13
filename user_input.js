@@ -120,5 +120,81 @@ function DigiRepGui(animations) {
 		p.rotation.y -= d;
 	}
 }*/
+
+var projector = new THREE.Projector();
+function onDocumentMouseDown(event) {
+    var intersects, raycaster;
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;	
+    var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+    
+    if(event.originalTarget.tagName != "CANVAS") return;
+    if(SELECTED_PLAYER) {SELECTED_PLAYER.material.opacity = 1;}
+    event.preventDefault();
+    vector = vector.unproject(camera);
+    raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+    if(set_action_phase) { //select the field when in set action to assign a dest. point
+		intersects = raycaster.intersectObjects( [plane, shot_target_mesh] );
+		//console.log(intersects);
+	} else {
+		intersects = raycaster.intersectObjects( [PLAYERS['p1'], PLAYERS['p2']] );
+	}
+	if ( intersects.length > 0 ) {
+	    if(set_action_phase) { //action dest. point
+			dest_point = intersects[ 0 ].point;
+			console.log(intersects[ 0 ].point);
+			/*if(user_data['name'] == ACTION_TYPE.head && !has_clicked) { //set the head strike and head shoot dest.
+			    head_point.copy(user_data['dest_point']);               //the first click is for the strike point
+			    has_clicked = true; //is the first click
+			}*/
+		} else {
+		    SELECTED = intersects[ 0 ].object;
+		    SELECTED_PLAYER = SELECTED;
+		    LAST_SELECTED = SELECTED;
+		    SELECTED_PLAYER.material.transparent = true;
+		    SELECTED_PLAYER.material.opacity = 0.5;
+		    intersects = raycaster.intersectObject( plane );
+		    offset.copy( intersects[ 0 ].point ).sub( plane.position );
+		}
+	}
+	
+}
+
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;			
+
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+				//projector.unprojectVector( vector, camera );
+	vector = vector.unproject(camera);
+
+	var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+	if ( SELECTED ) {
+		var intersects = raycaster.intersectObject( plane );
+					//SELECTED.position.copy( intersects[ 0 ].point.sub( offset ) );
+		SELECTED.position.copy( intersects[ 0 ].point);
+		SELECTED.position.y = 4.5;					
+		return;
+
+	}    
+ 
+    var intersects = raycaster.intersectObjects( [PLAYERS['p1'], PLAYERS['p2']]  );
+	if ( intersects.length > 0 ) {
+		if ( INTERSECTED != intersects[ 0 ].object ) {
+			INTERSECTED = intersects[ 0 ].object;
+		}
+	} else {
+			INTERSECTED = null;
+	}	
+}
+
+function onDocumentMouseUp( event ) {
+	event.preventDefault();
+	if ( INTERSECTED ) {
+		SELECTED = null;
+	}     
+}
 	
 
